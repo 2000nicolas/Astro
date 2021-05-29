@@ -1,15 +1,16 @@
-package com.example.country.presentation.list
+package com.example.astra.presentation.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.country.R
-import com.example.country.presentation.api.PlanetApi
-import com.example.country.presentation.api.PlanetResponse
+import com.example.astra.R
+import com.example.astra.presentation.api.PlanetApi
+import com.example.astra.presentation.api.PlanetResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +25,9 @@ class PlanetListFragment : Fragment() {
 
     private lateinit var recyclerView:RecyclerView
 
-    private val adapter = PlanetAdapter(listOf())
+    private val adapter = PlanetAdapter(listOf(), ::onClickedPlanet)
+
+
     private val layoutManager = LinearLayoutManager(context)
 
     override fun onCreateView(
@@ -75,5 +78,8 @@ class PlanetListFragment : Fragment() {
         }*/
 
 
+    }
+    private fun onClickedPlanet(planet: Planet) {
+        findNavController().navigate(R.id.navigateToPlanetDetailFragment)
     }
 }

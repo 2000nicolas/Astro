@@ -1,4 +1,4 @@
-package com.example.country.presentation.list
+package com.example.astra.presentation.list
 
 data class Planet(
         val name: String,

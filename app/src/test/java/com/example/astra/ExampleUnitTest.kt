@@ -1,4 +1,4 @@
-package com.example.country
+package com.example.astra
 
 import org.junit.Test
 
