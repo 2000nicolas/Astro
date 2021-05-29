@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.list.CountryListFragment">
+    tools:context=".presentation.list.PlanetListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/country_recyclerview"
@@ -15,5 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>

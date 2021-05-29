@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.country.R
 
-class CountryAdapter(private var dataSet: List<Country>) :
-        RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
+class PlanetAdapter(private var dataSet: List<Planet>) :
+        RecyclerView.Adapter<PlanetAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
@@ -23,7 +23,7 @@ class CountryAdapter(private var dataSet: List<Country>) :
         }
     }
 
-    fun updateList(list: List<Country>){
+    fun updateList(list: List<Planet>){
         dataSet = list
         notifyDataSetChanged()
     }

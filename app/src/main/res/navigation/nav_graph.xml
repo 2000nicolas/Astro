@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.country.presentation.list.CountryListFragment"
+        android:name="com.example.country.presentation.list.PlanetListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_country_list">
+        tools:layout="@layout/fragment_planet_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
