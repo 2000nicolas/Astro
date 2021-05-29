@@ -20,6 +20,10 @@
         android:name="com.example.astra.presentation.detail.PlanetDetailFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_planet_detail">
+        <argument
+            android:name="planetId"
+            app:argType="string"
+            android:defaultValue="nico"/>
 
         <action
             android:id="@+id/navigateToPlanetListFragment"

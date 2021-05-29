@@ -18,6 +18,7 @@ import retrofit2.Response
 
 class PlanetDetailFragment : Fragment() {
     private lateinit var textViewName:TextView
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -37,7 +38,8 @@ class PlanetDetailFragment : Fragment() {
 
     }
     private fun callApi(){
-        Singletons.planetApi.getPlanetDetail("lune").enqueue(object : Callback<PlanetDetailResponse>{
+        val id=arguments?.getString("planetId") ?: -1
+        Singletons.planetApi.getPlanetDetail(id as String).enqueue(object : Callback<PlanetDetailResponse>{
             override fun onFailure(call: Call<PlanetDetailResponse>, t: Throwable) {
 
             }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,6 +73,8 @@ class PlanetListFragment : Fragment() {
 
     }
     private fun onClickedPlanet(planet: Planet) {
-        findNavController().navigate(R.id.navigateToPlanetDetailFragment)
+        findNavController().navigate(R.id.navigateToPlanetDetailFragment, bundleOf(
+                "planetId" to planet.id
+        ))
     }
 }

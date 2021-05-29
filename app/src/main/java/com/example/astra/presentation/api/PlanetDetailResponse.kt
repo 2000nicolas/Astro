@@ -1,6 +1,7 @@
 package com.example.astra.presentation.api
 
 data class PlanetDetailResponse(
+        val id:String,
         val name: String,
         val englishName: String,
         val isPlanet: String,
