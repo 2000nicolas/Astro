@@ -9,13 +9,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astra.R
-import com.example.astra.presentation.api.PlanetApi
-import com.example.astra.presentation.api.PlanetResponse
+import com.example.astra.presentation.Singletons
+import com.example.astra.presentation.api.PlanetListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
@@ -49,22 +47,16 @@ class PlanetListFragment : Fragment() {
         }
 
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.le-systeme-solaire.net/rest/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val planetApi: PlanetApi = retrofit.create(PlanetApi::class.java)
-
-        planetApi.getCountryList().enqueue(object: Callback<PlanetResponse>{
-            override fun onFailure(call: Call<PlanetResponse>, t: Throwable) {
+        Singletons.planetApi.getPlanetList().enqueue(object: Callback<PlanetListResponse>{
+            override fun onFailure(call: Call<PlanetListResponse>, t: Throwable) {
 
             }
 
-            override fun onResponse(call: Call<PlanetResponse>, response: Response<PlanetResponse>) {
+            override fun onResponse(call: Call<PlanetListResponse>, response: Response<PlanetListResponse>) {
                 if(response.isSuccessful && response.body() != null){
-                    val countryResponse = response.body()!!
-                    adapter.updateList(countryResponse.bodies)
+                    val planetListResponse = response.body()!!
+                    adapter.updateList(planetListResponse.bodies)
                 }
             }
 
