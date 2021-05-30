@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,11 +15,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astra.R
-import com.example.astra.presentation.Singletons
-import com.example.astra.presentation.api.PlanetListResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 /**
@@ -25,6 +23,8 @@ import retrofit2.Response
 class PlanetListFragment : Fragment() {
 
     private lateinit var recyclerView:RecyclerView
+    private lateinit var loader: ProgressBar
+    private lateinit var textViewError: TextView
 
     private val adapter = PlanetAdapter(listOf(), ::onClickedPlanet)
 
@@ -44,15 +44,22 @@ class PlanetListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.country_recyclerview)
+        recyclerView = view.findViewById(R.id.planet_recyclerview)
+        loader = view.findViewById(R.id.planet_loader)
+        textViewError = view.findViewById(R.id.planet_error)
 
         recyclerView.apply {
             layoutManager = this@PlanetListFragment.layoutManager
             adapter = this@PlanetListFragment.adapter
         }
 
-        viewModel.planetList.observe(viewLifecycleOwner, Observer {list ->
-            adapter.updateList(list)
+        viewModel.planetList.observe(viewLifecycleOwner, Observer {planetModel ->
+            loader.isVisible = planetModel is PlanetLoader
+            textViewError.isVisible = planetModel is PlanetError
+
+            if(planetModel is PlanetSuccess){
+                adapter.updateList(planetModel.planetList)
+            }
         })
 
 
