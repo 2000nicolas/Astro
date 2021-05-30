@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,8 @@ class PlanetListFragment : Fragment() {
     private lateinit var recyclerView:RecyclerView
 
     private val adapter = PlanetAdapter(listOf(), ::onClickedPlanet)
+
+    private val viewModel: PlanetListViewModel by viewModels()
 
 
     private val layoutManager = LinearLayoutManager(context)
@@ -47,21 +51,11 @@ class PlanetListFragment : Fragment() {
             adapter = this@PlanetListFragment.adapter
         }
 
-
-
-        Singletons.planetApi.getPlanetList().enqueue(object: Callback<PlanetListResponse>{
-            override fun onFailure(call: Call<PlanetListResponse>, t: Throwable) {
-
-            }
-
-            override fun onResponse(call: Call<PlanetListResponse>, response: Response<PlanetListResponse>) {
-                if(response.isSuccessful && response.body() != null){
-                    val planetListResponse = response.body()!!
-                    adapter.updateList(planetListResponse.bodies)
-                }
-            }
-
+        viewModel.planetList.observe(viewLifecycleOwner, Observer {list ->
+            adapter.updateList(list)
         })
+
+
 
         /*val countryList = arrayListOf<Country>().apply {
             add(Country("France"))
