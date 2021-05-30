@@ -1,6 +1,10 @@
 # Astro
 Api des astres connus
 
+#############
+#DESCRIPTION#
+#############
+
 Cette application utilise l'API REST "api.le-systeme-solaire" à l'adresse : "https://api.le-systeme-solaire.net/rest".
 Elle est composé de deux écrans d'affichage :
   
@@ -14,8 +18,20 @@ L'affichage des propriétés des astres se fait elle aussi à l'aide d'un appel 
 Un bouton de retour en arriere est disponible sur cette page afin de retourner sur l'écran principal.
 
 
-
-
 L'application implémente les architecture NVVM et Singleton et une mise en cache
-  
-  
+
+########
+#DESIGN#
+########
+
+On peut voir ici :
+
+L'affichage de la liste de tous les astres
+
+![ListScreen](/SCREEEEEEEN/Capture.PNG?raw=true "Screen du ListFragment")
+
+Le detail de l'astre "terre"
+
+![DetailScreen](/SCREEEEEEEN/Capture2.PNG?raw=true "Screen du DetailFragment")
+
+
