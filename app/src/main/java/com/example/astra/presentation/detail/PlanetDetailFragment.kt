@@ -18,6 +18,14 @@ import retrofit2.Response
 
 class PlanetDetailFragment : Fragment() {
     private lateinit var textViewName:TextView
+    private lateinit var textViewEnglishName:TextView
+    private lateinit var textViewisPlanet:TextView
+    private lateinit var textViewmassValue:TextView
+    private lateinit var textViewmassExponent:TextView
+    private lateinit var textViewdensity:TextView
+    private lateinit var textViewgravity:TextView
+
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -31,10 +39,18 @@ class PlanetDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textViewName = view.findViewById(R.id.planet_detail_name)
+        textViewEnglishName = view.findViewById(R.id.planet_detail_englishName)
+        textViewisPlanet = view.findViewById(R.id.planet_detail_isPlanet)
+        textViewmassExponent = view.findViewById(R.id.planet_detail_massExponent)
+        textViewmassValue = view.findViewById(R.id.planet_detail_massValue)
+        textViewdensity = view.findViewById(R.id.planet_detail_density)
+        textViewgravity = view.findViewById(R.id.planet_detail_gravity)
         callApi()
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.navigateToPlanetListFragment)
         }
+
+
 
     }
     private fun callApi(){
@@ -47,6 +63,14 @@ class PlanetDetailFragment : Fragment() {
             override fun onResponse(call: Call<PlanetDetailResponse>, response: Response<PlanetDetailResponse>) {
                 if(response.isSuccessful && response.body() != null) {
                     textViewName.text = response.body()!!.name
+                    textViewEnglishName.text = "English Name : " + response.body()!!.englishName
+                    textViewisPlanet.text = "Est elle une planete ? " + response.body()!!.isPlanet
+                    textViewmassExponent.text = "Exposant de masse : " + response.body()!!.mass.massExponent
+                    textViewmassValue.text = "Masse : " + response.body()!!.mass.massValue
+                    textViewdensity.text = "densité : " + response.body()!!.density
+                    textViewgravity.text = "indice gravitationnel : " + response.body()!!.gravity
+
+
                 }
             }
 
